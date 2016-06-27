@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+        {% for message in messages %}
+            <li>{{ message }} </li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+<form method="POST">
+  {{ form.csrf_token }}
+  {{ form.title.label }}: {{ form.title }}<br>
+  {{ form.text(only_preview=True) }}
+  {{ form.text(only_input=True, rows=20) }}
+  <input type="submit" value="Submit" />
+</form>
+
+{% endblock %}

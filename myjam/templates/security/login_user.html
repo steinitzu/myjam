@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block content %}
+    {{ super() }}
+    <form action="{{ url_for_security('login') }}" method="POST" name="login_user_form">
+        {{ login_user_form.hidden_tag() }}
+        {{ render_field(login_user_form.email) }}
+        {{ render_field(login_user_form.password) }}
+        {{ submit_button("Log in") }}
+        {{ render_field(login_user_form.remember) }}
+        {{ render_menu_item("Not a member?", url_for_security('register'), url_text="Register here.") }}
+        {{ render_menu_item("Forgot password", url_for_security('forgot_password')) }}
+
+    </form>
+{% endblock %}

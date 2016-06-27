@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block content %}
+    {{ super() }}
+    <div class="form-group has-feedback">
+        <label class="control-label">Test field</label>
+        <input type="text" class="form-control" placeholder="Username">
+        <i class="glyphicon glyphicon-user form-control-feedback" aria-hidden="true"></i>
+
+        <input id="password" class="form-control" type="password" data-toggle="password"
+               data-placement="before" >
+
+        <p><label><input id="methods" type="checkbox"> Show password</label></p>
+    </div>
+
+
+{% endblock %}

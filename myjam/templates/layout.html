@@ -1,0 +1,43 @@
+{% extends "bootstrap/base.html" %}
+{% block styles %}
+    <link rel="stylesheet" type= "text/css"
+          href="{{url_for('static', filename='styles/extra.css')}}">
+    {{ pagedown.include_pagedown() }}
+
+
+    {{super()}}
+{% endblock %}
+
+
+{% block title %}MyJam{% endblock %}
+
+{% from "_formhelpers.html" import render_field, submit_button, render_menu_item %}
+{% from "_helpers.html" import render_pagination %}
+
+{% block body %}
+
+    {% block navbar %}
+        {{nav.navbar.render(renderer='fixed_top')}}
+    {% endblock %}
+
+    <div class="container-fluid">
+        {% block content %}
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{category}}">
+                            {{message}}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        {% endblock %}
+    </div>
+
+    {% block scripts %}
+        {{super()}}
+        <script src="{{url_for('static', filename='node_modules/bootstrap-show-password/bootstrap-show-password.min.js')}}">
+        </script>
+    {% endblock %}
+
+{% endblock %}

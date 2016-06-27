@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% block content %}
+    {{ super() }}
+    <div class="container-fluid">
+        <div class="row">
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                {{ render_field(form.query) }}
+            </form>
+        </div>
+        <div class="row">
+            <div class="">
+                {{ render_pagination(paginate, 'get_recipes', query=form.query.data) }}
+            </div>
+        </div>
+        {% for recipebatch in recipes | batch(4) %}
+            <div class="row">
+                {% for recipe in recipebatch %}
+                    <div class="col-xs-3">
+                        <a href="{{ recipe['url'] }}">
+                            {% if recipe['image_id'] %}
+                                {% set imgsrc = url_for('get_image', image_id=recipe['image_id']) %}
+                            {% else %}
+                                {% set imgsrc = "http://placehold.it/200x200" %}
+                            {% endif %}
+                            <img src="{{ imgsrc }}"
+                                 class="img-responsive thumbnail" width ="200"/>
+                            <p>
+                                <strong class="hide-overflow">
+                                    {{ recipe['name'] }}
+                                </strong>
+                            </p>
+                        </a>
+                    </div>
+                {% endfor %}
+
+            </div>
+
+        {% endfor %}
+
+        <div class="row">
+            <div class="">
+                {{ render_pagination(paginate, 'get_recipes', query=form.query.data) }}
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+{% endblock %}
